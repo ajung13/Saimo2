@@ -25,6 +25,7 @@ public class DBManager {
     private Context context;
     final private String db_name = "myDB";
     final private String table_name = "Memos";
+    final private String TAG = "myLog_DBManager";
 
     public SQLiteDatabase getDB(){
         return this.DB;
@@ -45,7 +46,7 @@ public class DBManager {
             DB.execSQL(createSQL);
         }catch(Exception e){
             errorFlag = true;
-            Log.e("myLog_DBManager", e.toString());
+            Log.e(TAG, e.toString());
         }
 
         if(DB.isOpen())
@@ -68,7 +69,7 @@ public class DBManager {
             DB.execSQL(insertSQL);
         }catch(Exception e){
             errorFlag = true;
-            Log.e("myLog_DBManager", e.toString());
+            Log.e(TAG, e.toString());
         }
 
         if(DB.isOpen())
@@ -98,7 +99,7 @@ public class DBManager {
             if(c != null && !c.isClosed())
                 c.close();
         }catch(Exception e){
-            Log.e("myLog_DBManager", e.toString());
+            Log.e(TAG, e.toString());
         }
 
         if(DB.isOpen())
