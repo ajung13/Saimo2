@@ -22,12 +22,6 @@ public class newMemoWidget extends AppWidgetProvider {
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
-
-        Intent intent = new Intent(context, newMemoWidget.class);
-        intent.setAction(ACTION_CLICK);
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, appWidgetId, intent, 0);
-        views.setOnClickPendingIntent(R.id.addMemoButton, pendingIntent);
     }
 
     @Override
@@ -35,6 +29,13 @@ public class newMemoWidget extends AppWidgetProvider {
         // There may be multiple widgets active, so update all of them
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
+
+            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_memo_widget);
+            Intent intent = new Intent(context, newMemoWidget.class);
+            intent.setAction(ACTION_CLICK);
+            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, appWidgetId, intent, 0);
+            views.setOnClickPendingIntent(R.id.addMemoButton, pendingIntent);
         }
     }
 

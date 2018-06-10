@@ -42,15 +42,6 @@ public class MainActivity extends AppCompatActivity {
         msgInput = (EditText)findViewById(R.id.mainEditText);
         msgOutput = (TextView)findViewById(R.id.mainText1);
 
-/*        Button btn = (Button)findViewById(R.id.mainButton);
-        btn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-//                String input = msgInput.getText().toString();
-//                send(input);
-            }
-        });*/
-
         queue = Volley.newRequestQueue(getApplicationContext());
         getRegistrationId();
     }

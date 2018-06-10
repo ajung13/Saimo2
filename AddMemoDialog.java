@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -20,18 +21,13 @@ public class AddMemoDialog extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.widget_newmemo_dialog);
 
-/*        Log.e("myLog_dialog", "constructor2");
-
         et = (EditText)findViewById(R.id.newMemoEditText);
         addButton = (Button)findViewById(R.id.newMemoAddButton);
         addButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.e("myLog_dialog", "button clicked");
                 dismiss();
             }
-        });*/
-
-        Log.e("myLog_dialog", "constructor3");
+        });
     }
 
     public AddMemoDialog(Context context){
