@@ -1,5 +1,6 @@
 package ajung13.github.saimo;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
@@ -22,11 +23,11 @@ public class newMemoWidget extends AppWidgetProvider {
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
 
-/*        Intent intent = new Intent(context, newMemoWidget.class);
+        Intent intent = new Intent(context, newMemoWidget.class);
         intent.setAction(ACTION_CLICK);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, appWidgetId, intent, 0);
-        views.setOnClickPendingIntent(R.id.addMemoButton, pendingIntent);*/
+        views.setOnClickPendingIntent(R.id.addMemoButton, pendingIntent);
     }
 
     @Override

@@ -2,11 +2,8 @@ package ajung13.github.saimo;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.View;
-import android.view.Window;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -17,24 +14,28 @@ import android.widget.EditText;
 public class AddMemoDialog extends Dialog {
     private EditText et;
     private Button addButton;
-    private View.OnClickListener mClickListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         setContentView(R.layout.widget_newmemo_dialog);
+
+/*        Log.e("myLog_dialog", "constructor2");
 
         et = (EditText)findViewById(R.id.newMemoEditText);
         addButton = (Button)findViewById(R.id.newMemoAddButton);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.e("myLog_dialog", "button clicked");
+                dismiss();
+            }
+        });*/
 
-        if(mClickListener != null)
-            addButton.setOnClickListener(mClickListener);
+        Log.e("myLog_dialog", "constructor3");
     }
 
-    public AddMemoDialog(Context context, String title, View.OnClickListener singleListener){
-        super(context, android.R.style.Theme_Translucent_NoTitleBar);
-        this.mClickListener = singleListener;
+    public AddMemoDialog(Context context){
+        super(context);
+        Log.e("myLog_dialog", "constructor");
     }
 }

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -33,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     String regId;
     RequestQueue queue;
 
+    private AddMemoDialog memoDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,14 +42,14 @@ public class MainActivity extends AppCompatActivity {
         msgInput = (EditText)findViewById(R.id.mainEditText);
         msgOutput = (TextView)findViewById(R.id.mainText1);
 
-        Button btn = (Button)findViewById(R.id.mainButton);
+/*        Button btn = (Button)findViewById(R.id.mainButton);
         btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                String input = msgInput.getText().toString();
-                send(input);
+//                String input = msgInput.getText().toString();
+//                send(input);
             }
-        });
+        });*/
 
         queue = Volley.newRequestQueue(getApplicationContext());
         getRegistrationId();
@@ -61,6 +62,11 @@ public class MainActivity extends AppCompatActivity {
             processIntent(intent);
         }
         super.onNewIntent(intent);
+    }
+
+    public void btnClicked(View v){
+        memoDialog = new AddMemoDialog(this);
+        memoDialog.show();
     }
 
     public void getRegistrationId(){
