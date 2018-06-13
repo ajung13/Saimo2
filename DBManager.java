@@ -12,12 +12,11 @@ import java.util.Date;
 /**
  * Created by Hyunah on 2018-06-03.
  * In DB, there's only one table now: 'Memos'
- * Memos :  idx         INTEGER     AUTOINCREMENT,
+ * Memos :  idx         INTEGER     PRIMARY KEY (AUTOINCREMENT),
  *          favorite    INTEGER     DEFAULT 0,
  *          category    VARCHAR(10) DEFAULT 'NONE',
  *          memo        text,
- *          writeTime   datetime,
- *          PRIMARY KEY(idx)
+ *          writeTime   datetime
  **/
 
 public class DBManager {
