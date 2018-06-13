@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
     String regId;
     RequestQueue queue;
 
-    private AddMemoDialog memoDialog;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +54,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btnClicked(View v){
-        memoDialog = new AddMemoDialog(this);
-        memoDialog.show();
+
     }
 
     public void getRegistrationId(){
