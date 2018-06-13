@@ -21,7 +21,7 @@ import java.util.Date;
  **/
 
 public class DBManager {
-    private SQLiteDatabase DB;
+    static private SQLiteDatabase DB;
     private Context context;
     final private String db_name = "myDB";
     final private String table_name = "Memos";

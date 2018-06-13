@@ -6,6 +6,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 public class newMemoWidget extends AppWidgetProvider {
@@ -29,8 +30,11 @@ public class newMemoWidget extends AppWidgetProvider {
         }//업데이트인 경우
         else if(action.equals("Click1"))
         {
-            AddMemoDialog memoDialog = new AddMemoDialog(context);
-            memoDialog.show();
+            Log.e("myLog_widget", "widgetButtonClicked");
+            Intent myIntent = new Intent(Intent.ACTION_VIEW);
+            myIntent.setClassName("ajung13.github.saimo", "ajung13.github.saimo.WidgetToAppActivity");
+            myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(myIntent);
         }
     }
 
@@ -38,6 +42,7 @@ public class newMemoWidget extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
+
         final int N = appWidgetIds.length;
         for (int i = 0; i < N; i++) {
             int appWidgetId = appWidgetIds[i];
