@@ -22,7 +22,6 @@ import java.util.Date;
 
 public class DBManager {
     static private SQLiteDatabase DB;
-    private Context context;
     final private String db_name = "myDB";
     final private String table_name = "Memos";
     final private String TAG = "myLog_DBManager";
@@ -33,20 +32,18 @@ public class DBManager {
     public boolean initDB(Context context){
         boolean errorFlag = false;
         try {
-            this.context = context;
             DB = context.openOrCreateDatabase(db_name, Context.MODE_PRIVATE, null);
 
             String createSQL = "CREATE TABLE IF NOT EXISTS " + table_name + "(";
-            createSQL += "idx integer autoincrement, ";
+            createSQL += "idx integer primary key, ";
             createSQL += "favorite integer default 0, ";
             createSQL += "category varchar(10) default 'none', ";
             createSQL += "memo text, ";
-            createSQL += "writeTime datetime, ";
-            createSQL += "primary key(idx));";
+            createSQL += "writeTime datetime);";
             DB.execSQL(createSQL);
         }catch(Exception e){
             errorFlag = true;
-            Log.e(TAG, e.toString());
+            Log.e(TAG + "(1)", e.toString());
         }
 
         if(DB.isOpen())
@@ -54,7 +51,7 @@ public class DBManager {
         return errorFlag;
     }
 
-    public boolean insert(String category, String memo){
+    public boolean insert(Context context, String category, String memo){
         boolean errorFlag = false;
         try {
             DB = context.openOrCreateDatabase(db_name, Context.MODE_PRIVATE, null);
@@ -69,7 +66,7 @@ public class DBManager {
             DB.execSQL(insertSQL);
         }catch(Exception e){
             errorFlag = true;
-            Log.e(TAG, e.toString());
+            Log.e(TAG + "(2)", e.toString());
         }
 
         if(DB.isOpen())
@@ -77,15 +74,16 @@ public class DBManager {
         return errorFlag;
     }
 
-    public String selectAll(){
+    public String selectAll(Context context){
         String result = "";
         try{
             DB = context.openOrCreateDatabase(db_name, Context.MODE_PRIVATE, null);
 
             Cursor c = DB.rawQuery("SELECT * FROM " + table_name, null);
             if(c!=null){
-                result += c.getCount() + " items\n";
+                result += c.getCount() + " items\n\n";
                 if(c.moveToFirst()){
+                    result += "idx\tcategory\tfavorite\tWriteTime\tmemo\n";
                     do{
                         result += c.getInt(c.getColumnIndexOrThrow("idx"));
                         result += "\t" + c.getString(c.getColumnIndexOrThrow("category"));
@@ -99,7 +97,7 @@ public class DBManager {
             if(c != null && !c.isClosed())
                 c.close();
         }catch(Exception e){
-            Log.e(TAG, e.toString());
+            Log.e(TAG + "(3)", e.toString());
         }
 
         if(DB.isOpen())
@@ -108,7 +106,7 @@ public class DBManager {
     }
 
     private String getNowTime(){
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:nn:ss");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Date date = new Date();
         return dateFormat.format(date);
     }

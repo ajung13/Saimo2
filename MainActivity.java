@@ -14,6 +14,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         msgOutput = (TextView)findViewById(R.id.mainText1);
-        msgOutput.setText("Hello world");
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+
+        DBManager dbManager = new DBManager();
+        msgOutput.setText(dbManager.selectAll(this));
     }
 }
