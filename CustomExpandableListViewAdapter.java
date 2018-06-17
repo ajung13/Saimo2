@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ public class CustomExpandableListViewAdapter extends BaseExpandableListAdapter {
         }
         TextView parentText = (TextView)convertView.findViewById(R.id.parentText);
         parentText.setText(getGroup(groupPosition).getMemoTitle());
-        ImageView favorite = (ImageView)convertView.findViewById(R.id.parentFavorite);
+        ImageButton favorite = (ImageButton)convertView.findViewById(R.id.parentFavorite);
         if(getGroup(groupPosition).getFavorite())
             favorite.setImageResource(R.drawable.list_favorite_on);
         else

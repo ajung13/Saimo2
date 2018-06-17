@@ -137,7 +137,7 @@ public class DBManager {
         try{
             DB = context.openOrCreateDatabase(db_name, Context.MODE_PRIVATE, null);
 
-            Cursor c = DB.rawQuery("SELECT memo FROM " + table_name, null);
+            Cursor c = DB.rawQuery("SELECT favorite FROM " + table_name, null);
             if(c != null && c.getCount() != 0){
                 result = new boolean[c.getCount()];
                 if(c.moveToFirst()){

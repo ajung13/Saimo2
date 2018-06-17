@@ -34,8 +34,8 @@ public class ExpListHelper {
         return parentList.size()-1;
     }
     public void addParents(String[] elements, boolean[] favorites){
-        if(elements.length != favorites.length || elements.length > parentList.size()){
-            Log.e(TAG, "input length is wrong");
+        if(elements.length != favorites.length){
+            Log.e(TAG, "input length is wrong : " + elements.length + ", " + favorites.length);
             return;
         }
         for(int i = 0; i < elements.length; i++)
