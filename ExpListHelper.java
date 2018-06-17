@@ -17,23 +17,29 @@ public class ExpListHelper {
     private Activity activity;
     private ExpandableListView expandableListView;
     private CustomExpandableListViewAdapter expAdapter;
-    private ArrayList<String> parentList;
-    private ArrayList<ChildListData> list2;
-    private ArrayList<ChildListData> list3;
-    private HashMap<String, ArrayList<ChildListData>> childList;
+    private ArrayList<ParentListData> parentList;
+    private HashMap<ParentListData, ArrayList<ChildListData>> childList;
 
     public ExpListHelper(Activity activity, int listViewId){
         this.activity = activity;
         this.expandableListView = (ExpandableListView)this.activity.findViewById(listViewId);
-        this.parentList = new ArrayList<String>();
-        this.childList = new HashMap<String, ArrayList<ChildListData>>();
+        this.parentList = new ArrayList<>();
+        this.childList = new HashMap<>();
     }
 
-    public int addParent(String element){
+    public int addParent(String element, boolean favorite){
         //input : the attributes of new parent
         //output : the ordering of the parent
-        parentList.add(element);
+        parentList.add(new ParentListData(element, favorite));
         return parentList.size()-1;
+    }
+    public void addParents(String[] elements, boolean[] favorites){
+        if(elements.length != favorites.length || elements.length > parentList.size()){
+            Log.e(TAG, "input length is wrong");
+            return;
+        }
+        for(int i = 0; i < elements.length; i++)
+            parentList.add(new ParentListData(elements[i], favorites[i]));
     }
 
     public void addChildren(int parent, String[] child_detail, String[] child_info){
@@ -43,8 +49,12 @@ public class ExpListHelper {
             Log.e(TAG, "the length of child_detail and info is different");
             return;
         }
+        if(parent >= parentList.size()){
+            Log.e(TAG, "parent idx is wrong");
+            return;
+        }
 
-        ArrayList<ChildListData> list1 = new ArrayList<ChildListData>();
+        ArrayList<ChildListData> list1 = new ArrayList<>();
         for(int i = 0; i < child_detail.length; i++) {
             ChildListData childListData = new ChildListData(child_detail[i], child_info[i]);
             list1.add(childListData);

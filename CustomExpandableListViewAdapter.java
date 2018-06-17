@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,13 +17,13 @@ import java.util.HashMap;
 
 public class CustomExpandableListViewAdapter extends BaseExpandableListAdapter {
     private Context context;
-    private ArrayList<String> mParentList;
+    private ArrayList<ParentListData> mParentList;
     private ArrayList<ChildListData> mChildList;
     private ChildListViewHolder mChildListViewHolder;
-    private HashMap<String, ArrayList<ChildListData>> mChildHashMap;
+    private HashMap<ParentListData, ArrayList<ChildListData>> mChildHashMap;
 
     //constructor
-    public CustomExpandableListViewAdapter(Context context, ArrayList<String> parentList, HashMap<String, ArrayList<ChildListData>> childHashMap) {
+    public CustomExpandableListViewAdapter(Context context, ArrayList<ParentListData> parentList, HashMap<ParentListData, ArrayList<ChildListData>> childHashMap) {
         this.context = context;
         this.mParentList = parentList;
         this.mChildHashMap = childHashMap;
@@ -30,7 +31,7 @@ public class CustomExpandableListViewAdapter extends BaseExpandableListAdapter {
 
     //override for parent list view
     @Override
-    public String getGroup(int groupPosition){
+    public ParentListData getGroup(int groupPosition){
         return mParentList.get(groupPosition);
     }
     @Override
@@ -48,7 +49,12 @@ public class CustomExpandableListViewAdapter extends BaseExpandableListAdapter {
             convertView = groupInfla.inflate(R.layout.listview_parent, parent, false);
         }
         TextView parentText = (TextView)convertView.findViewById(R.id.parentText);
-        parentText.setText(getGroup(groupPosition));
+        parentText.setText(getGroup(groupPosition).getMemoTitle());
+        ImageView favorite = (ImageView)convertView.findViewById(R.id.parentFavorite);
+        if(getGroup(groupPosition).getFavorite())
+            favorite.setImageResource(R.drawable.list_favorite_on);
+        else
+            favorite.setImageResource(R.drawable.list_favorite);
         return convertView;
     }
 

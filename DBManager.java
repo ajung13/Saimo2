@@ -104,6 +104,60 @@ public class DBManager {
         return result;
     }
 
+    public String[] selectAllMemoTitle(Context context){
+        String[] result = null;
+        int idx = 0;
+        try{
+            DB = context.openOrCreateDatabase(db_name, Context.MODE_PRIVATE, null);
+
+            Cursor c = DB.rawQuery("SELECT memo FROM " + table_name, null);
+            if(c != null && c.getCount() != 0){
+                result = new String[c.getCount()];
+                if(c.moveToFirst()){
+                    do{
+                        result[idx] = c.getString(c.getColumnIndexOrThrow("memo"));
+                        idx++;
+                    }while(c.moveToNext());
+                }
+            }
+            if(c != null && !c.isClosed())
+                c.close();
+        }catch(Exception e){
+            Log.e(TAG + "(4)", e.toString());
+        }
+
+        if(DB.isOpen())
+            DB.close();
+        return result;
+    }
+
+    public boolean[] selectAllMemoFavorite(Context context){
+        boolean[] result = null;
+        int idx = 0;
+        try{
+            DB = context.openOrCreateDatabase(db_name, Context.MODE_PRIVATE, null);
+
+            Cursor c = DB.rawQuery("SELECT memo FROM " + table_name, null);
+            if(c != null && c.getCount() != 0){
+                result = new boolean[c.getCount()];
+                if(c.moveToFirst()){
+                    do{
+                        result[idx] = (c.getInt(c.getColumnIndexOrThrow("favorite")) == 1);
+                        idx++;
+                    }while(c.moveToNext());
+                }
+            }
+            if(c != null && !c.isClosed())
+                c.close();
+        }catch(Exception e){
+            Log.e(TAG + "(5)", e.toString());
+        }
+
+        if(DB.isOpen())
+            DB.close();
+        return result;
+    }
+
     private String getNowTime(){
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Date date = new Date();
