@@ -65,6 +65,13 @@ public class ExpListHelper {
     public void fix(){
         expAdapter = new CustomExpandableListViewAdapter(activity, parentList, childList);
         expandableListView.setAdapter(expAdapter);
+        expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
+                Log.e(TAG, "group clicked");
+                return false;
+            }
+        });
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int groupPosition) {

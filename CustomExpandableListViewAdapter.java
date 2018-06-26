@@ -55,6 +55,7 @@ public class CustomExpandableListViewAdapter extends BaseExpandableListAdapter {
             favorite.setImageResource(R.drawable.list_favorite_on);
         else
             favorite.setImageResource(R.drawable.list_favorite);
+
         return convertView;
     }
 
@@ -73,7 +74,7 @@ public class CustomExpandableListViewAdapter extends BaseExpandableListAdapter {
     }
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent){
-        ChildListData childListData = (ChildListData)getChild(groupPosition, childPosition);
+//        ChildListData childListData = (ChildListData)getChild(groupPosition, childPosition);
         if(convertView == null){
             LayoutInflater childInfla = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = childInfla.inflate(R.layout.listview_child, null);
