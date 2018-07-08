@@ -34,12 +34,19 @@ public class ExpListHelper {
         return parentList.size()-1;
     }
     public void addParents(String[] elements, boolean[] favorites){
+        if(elements == null || favorites == null){
+            Log.e(TAG, "input is null");
+            return;
+        }
         if(elements.length != favorites.length){
             Log.e(TAG, "input length is wrong : " + elements.length + ", " + favorites.length);
             return;
         }
         for(int i = 0; i < elements.length; i++)
             parentList.add(new ParentListData(elements[i], favorites[i]));
+    }
+    public void cleanParents(){
+        parentList.clear();
     }
 
     public void addChildren(int parent, String[] child_detail, String[] child_info){
@@ -88,5 +95,9 @@ public class ExpListHelper {
                 return false;
             }
         });
+    }
+
+    public int getParentNum(){
+        return parentList.size();
     }
 }
